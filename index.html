@@ -1,0 +1,161 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="website/js/jquery.js"></script>
+		<script type="text/javascript" src="js/Drag.js"></script>
+		<script type="text/javascript" src="js/ResizeHandle.js"></script>
+		<script type="text/javascript" src="js/Slider.js"></script>
+		<script type="text/javascript" src="js/Tools.js"></script>
+		<script type="text/javascript" src="js/Photobooth_RZF.js"></script>
+		<script type="text/javascript" src="js/jqueryIntegration.js"></script>
+		<link type="text/css" rel="stylesheet" media="screen" href="css/Photobooth.css" />
+		<link type="text/css" rel="stylesheet" media="screen" href="website/css/page.css" />
+		<title>Photobooth.js</title>
+
+		<style type="text/css">
+			#photobooth_wrapper {
+				position: relative;
+				padding-top: 56.25%;
+			}
+			#rzf_photobooth {
+				position: absolute;
+				top: 0; right: 0; left: 0; bottom: 0;
+			}
+			#rzf_photobooth_stickers {
+				position: absolute;
+				top: 0; left: 0;
+				width: 100%;
+				height: 100%;
+			}
+			#rzf_photobooth_stickers canvas {
+				background-color: red;
+				width: 100%;
+				height:100%;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="wrapper">
+			<h1>
+				<a name="Demo">HTML5 Fun Photobooth</a>
+			</h1>
+			<div id="photobooth_wrapper">
+				<div id="rzf_photobooth"></div>
+				<div id="rzf_photobooth_stickers"><canvas></canvas></div>
+			</div>
+			<div id="gallery"></div>
+
+			<div id="decor">
+				<ul id="filters">
+					<li><button type="button" data-filter="filter0" data-hsb="0;0;0">RESET</button></li>
+					<li><button type="button" data-filter="filter1" data-hsb="0.2;-0.3;0.5">Filtre 1</button></li>
+					<li><button type="button" data-filter="filter2" data-hsb="-0.4;0.1;-0.4">Filtre 2</button></li>
+					<li><button type="button" data-filter="filter3" data-hsb="0.1;0.4;0.1">Filtre 3</button></li>
+					<li><button type="button" data-filter="filter4" data-hsb="0.2;0.3;-0.2">Filtre 4</button></li>
+				</ul>
+			</div>
+
+
+
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
+
+			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
+
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
+
+			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
+
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
+
+			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
+		</div>
+
+		<script>
+			var PB = PB || [];
+			$(function(){
+
+				$('#rzf_photobooth').photobooth().on('image', function( event, dataUrl ){
+					$('#gallery').show().html('<img src="' + dataUrl + '" >');
+				});
+				var oPhotobooth = $('#rzf_photobooth').data('photobooth');
+				PB.photobooth = oPhotobooth;
+
+				PB.setHSBfilters = function(tHSB){
+					console.log(tHSB)
+					console.log(oPhotobooth)
+					oPhotobooth.setHueOffset(tHSB[0]);
+					oPhotobooth.setSaturationOffset(tHSB[1]);
+					oPhotobooth.setBrightnessOffset(tHSB[2]);
+				};
+				//HANDLE FILTERS
+				$('#filters').find('button').click(function(){
+					var $this = $(this);
+					console.log($this);
+					var tHSB = $this.attr('data-hsb').split(';');
+
+					for(var i=0;i<tHSB.length;i++){
+						tHSB[i] = parseFloat(tHSB[i]);
+					}
+
+					PB.setHSBfilters(tHSB);
+					// oPhotobooth.setHueOffset(tHSB[0]);
+					// oPhotobooth.setSaturationOffset(tHSB[1]);
+					// oPhotobooth.setBrightnessOffset(tHSB[2]);
+				});
+
+				//ADD IMAGES
+				var canvasStickers = $('#rzf_photobooth_stickers').find('canvas').get(0);
+				var contextStickers = canvasStickers.getContext('2d');
+
+
+				function make_base() {
+					var base_image = new Image();
+					base_image.src = 'assets/stranger.png';
+					var newWidth = base_image.width;
+					if(base_image.width > canvasStickers.width) {
+						newWidth = canvasStickers.width - canvasStickers.width/2.5;
+					}
+					console.log(newWidth)
+
+					var newHeight = newWidth * base_image.height / base_image.width;
+					
+					base_image.onload = function(){
+						contextStickers.drawImage(base_image, 0, canvasStickers.height - newHeight, newWidth,  newHeight);
+					}
+				}
+				make_base();
+
+
+
+
+				//CAPTURE
+				var cE = function( s ){ return document.createElement( s ); };
+				PB.capturePhoto = function(){
+					var mData = {
+						x: 0,
+						y: 0,
+						width: _width,
+						height: _height
+					};
+
+					var eTempCanvas = cE("canvas");
+
+					eTempCanvas.width = mData.width;
+					eTempCanvas.height = mData.height;
+
+					
+					var oImageData = oOutput.getImageData(mData.x, mData.y, mData.width, mData.height);
+					eTempCanvas.getContext("2d").putImageData(oImageData, 0, 0);
+					
+					scope.onImage(eTempCanvas.toDataURL());
+				};
+
+			});
+		</script>
+	</body>
+</html>
