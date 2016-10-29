@@ -93,7 +93,7 @@
 		<script>
 
 			//TODO
-			// create php webservice to save base64 as an actual image. 
+			// create php webservice to save base64 as an actual image.
 			// fix custom position for stickers 
 			// remove toolbar (add option on PhotoboothJs lib)
 			// set size on the main canvas (mobile support?)
@@ -109,6 +109,14 @@
 					$('#gallery').show().append('<img src="' + dataUrl + '" >');
 
 					//create physical image
+					$.ajax({ 
+						type: 'POST', 
+						url: 'ws/create-img.php',
+						dataType: 'text',
+						data: {
+							base64 : dataUrl
+						}
+					});
 				});
 				var oPhotobooth = $('#rzf_photobooth').data('photobooth');
 				PB.photobooth = oPhotobooth;
