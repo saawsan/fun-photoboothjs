@@ -14,6 +14,11 @@
 		<title>Photobooth.js</title>
 
 		<style type="text/css">
+			body { background: #333; }
+			h1 {
+				margin-bottom: 1em;
+				opacity:.6;
+			}
 			#photobooth_wrapper {
 				position: relative;
 				padding-top: 56.25%;
@@ -55,7 +60,16 @@
 					<li><button type="button" data-filter="filter3" data-hsb="0.1;0.4;0.1">Filtre 3</button></li>
 					<li><button type="button" data-filter="filter4" data-hsb="0.2;0.3;-0.2">Filtre 4</button></li>
 				</ul>
+				<ul id="stickers">
+					<li><button type="button" class="reset">RESET</button></li>
+					<li><button type="button" data-img="stranger.png" data-pos="bottom;left">Sticker 1</button></li>
+					<li><button type="button" data-img="backfuture.png" data-pos="top;center">Sticker 2</button></li>
+					<li><button type="button" data-img="stranger.png">Filtre 2</button></li>
+					<li><button type="button" data-img="stranger.png">Filtre 3</button></li>
+					<li><button type="button" data-img="stranger.png">Filtre 4</button></li>
+				</ul>
 			</div>
+			<button type="button" id="smile">TAKE A PICTURE</button>
 
 
 
@@ -75,12 +89,26 @@
 			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
 		</div>
 
+
 		<script>
+
+			//TODO
+			// create php webservice to save base64 as an actual image. 
+			// fix custom position for stickers 
+			// remove toolbar (add option on PhotoboothJs lib)
+			// set size on the main canvas (mobile support?)
+			// add new assets
+			// test
+			// clean code
+
 			var PB = PB || [];
 			$(function(){
 
 				$('#rzf_photobooth').photobooth().on('image', function( event, dataUrl ){
-					$('#gallery').show().html('<img src="' + dataUrl + '" >');
+					console.log('capture image event callback'); 
+					$('#gallery').show().append('<img src="' + dataUrl + '" >');
+
+					//create physical image
 				});
 				var oPhotobooth = $('#rzf_photobooth').data('photobooth');
 				PB.photobooth = oPhotobooth;
@@ -103,15 +131,13 @@
 					}
 
 					PB.setHSBfilters(tHSB);
-					// oPhotobooth.setHueOffset(tHSB[0]);
-					// oPhotobooth.setSaturationOffset(tHSB[1]);
-					// oPhotobooth.setBrightnessOffset(tHSB[2]);
 				});
 
 				//ADD IMAGES
 				var canvasStickers = $('#rzf_photobooth_stickers').find('canvas').get(0);
 				var contextStickers = canvasStickers.getContext('2d');
 
+				var path = 'assets/';
 
 				function make_base() {
 					var base_image = new Image();
@@ -120,7 +146,7 @@
 					if(base_image.width > canvasStickers.width) {
 						newWidth = canvasStickers.width - canvasStickers.width/2.5;
 					}
-					console.log(newWidth)
+					// console.log(newWidth)
 
 					var newHeight = newWidth * base_image.height / base_image.width;
 					
@@ -128,19 +154,59 @@
 						contextStickers.drawImage(base_image, 0, canvasStickers.height - newHeight, newWidth,  newHeight);
 					}
 				}
-				make_base();
+				// make_base();
+				var addStickers = function(sImg, tPos){
+					var newSticker = new Image();
+					newSticker.src = path+sImg;
+					console.log(path+sImg);	
 
+					var stickerWidth = newSticker.width;
+					if(newSticker.width > canvasStickers.width) {
+						stickerWidth = canvasStickers.width - canvasStickers.width/2.5;
+					}
+					var stickerHeight = stickerWidth * newSticker.height / newSticker.width;
 
+					newSticker.onload = function(){
+						//clear canvas before add new sticker
+						contextStickers.clearRect(0, 0, canvasStickers.width, canvasStickers.height);
+						contextStickers.drawImage(newSticker, 0, canvasStickers.height - stickerHeight, stickerWidth,  stickerHeight);
+					}
+				};
+				$('#stickers').find('button').click(function(){
+					var $this = $(this);
+					if($this.hasClass('reset')){
+						contextStickers.clearRect(0, 0, canvasStickers.width, canvasStickers.height);
+					} else {
+						var tPos = $this.attr('data-pos').split(';');
+						var sImg = $this.attr('data-img');
+						addStickers(sImg, tPos);
+					}
+
+				});
 
 
 				//CAPTURE
 				var cE = function( s ){ return document.createElement( s ); };
+
+				// var eOutput = ePhotobooth.getElementsByTagName( "canvas" )[ 0 ];
+				// var oOutput = eOutput.getContext( "2d" );
+
+				var canvasPhotobooth = $('#rzf_photobooth').find('canvas').get(0);
+				var contextPhotobooth = canvasPhotobooth.getContext('2d');
+				var eBlind = $('#rzf_photobooth').find('.blind').get(0);
 				PB.capturePhoto = function(){
+					/**
+					* Flash
+					*/
+					eBlind.className = "blind";
+					eBlind.style.opacity = 1;
+					setTimeout(function () { eBlind.className = "blind anim"; eBlind.style.opacity = 0; }, 50);
+
 					var mData = {
 						x: 0,
 						y: 0,
-						width: _width,
-						height: _height
+						width: canvasPhotobooth.width,
+						height: canvasPhotobooth.height
 					};
 
 					var eTempCanvas = cE("canvas");
@@ -149,11 +215,21 @@
 					eTempCanvas.height = mData.height;
 
 					
-					var oImageData = oOutput.getImageData(mData.x, mData.y, mData.width, mData.height);
+					var oImageData = contextPhotobooth.getImageData(mData.x, mData.y, mData.width, mData.height);
 					eTempCanvas.getContext("2d").putImageData(oImageData, 0, 0);
 					
-					scope.onImage(eTempCanvas.toDataURL());
+
+					eTempCanvas.getContext("2d").drawImage(canvasStickers,0,0, mData.width, mData.height);
+
+					
+					oPhotobooth.onImage(eTempCanvas.toDataURL());
 				};
+
+
+				//take picture
+				$('#smile').on('click', function(){
+					PB.capturePhoto();
+				});
 
 			});
 		</script>
