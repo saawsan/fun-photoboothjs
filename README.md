@@ -1,0 +1,2 @@
+# fun-photoboothjs
+Fun Photobooth
