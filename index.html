@@ -2,18 +2,25 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<script type="text/javascript" src="website/js/jquery.js"></script>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/Drag.js"></script>
 		<script type="text/javascript" src="js/ResizeHandle.js"></script>
 		<script type="text/javascript" src="js/Slider.js"></script>
 		<script type="text/javascript" src="js/Tools.js"></script>
 		<script type="text/javascript" src="js/Photobooth_RZF.js"></script>
 		<script type="text/javascript" src="js/jqueryIntegration.js"></script>
+		
 		<link type="text/css" rel="stylesheet" media="screen" href="css/Photobooth.css" />
-		<link type="text/css" rel="stylesheet" media="screen" href="website/css/page.css" />
-		<title>Photobooth.js</title>
+		<title>Photobooth</title>
 
 		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style-type: none;
+				outline: none;
+			}
 			body { 
 				background: #020204 url(img/moon.jpg) no-repeat 90% 0;
 				background: #020204 url(img/moon.jpg) no-repeat calc(50% + 380px) -40px;
@@ -49,6 +56,9 @@
 				height:100%;
 			}
 
+			button {
+				cursor:pointer;
+			}
 
 			#filters {
 				position: absolute;
@@ -109,8 +119,8 @@
 				</ul>
 				<ul id="stickers">
 					<li><button type="button" class="reset">Pas de stickers</button></li>
-					<li><button type="button" data-img="stranger.png" data-pos="bottom;left">Sticker 1</button></li>
-					<li><button type="button" data-img="backfuture.png" data-pos="top;center">Sticker 2</button></li>
+					<li><button type="button" data-img="stranger.png" data-pos="bottom;left">Stranger</button></li>
+					<li><button type="button" data-img="backfuture.png" data-pos="top;center">Future</button></li>
 					<li><button type="button" data-img="backfuture.png" data-pos="bottom;right">Sticker 3</button></li>
 					<li><button type="button" data-img="backfuture.png" data-pos="center;left">Sticker 4</button></li>
 				</ul>
@@ -120,20 +130,6 @@
 
 			<div id="gallery"></div>
 
-
-			<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
-
-			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
-
-
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
-
-			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
-
-
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
-
-			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p> -->
 		</div>
 
 
@@ -153,7 +149,7 @@
 			$(function(){
 
 				$('#rzf_photobooth').photobooth().on('image', function( event, dataUrl ){
-					$('#gallery').show().append('<img src="' + dataUrl + '" >');
+					// $('#gallery').show().append('<img src="' + dataUrl + '" >');
 
 					//create physical image
 					$.ajax({ 
@@ -285,9 +281,8 @@
 					
 					var oImageData = contextPhotobooth.getImageData(mData.x, mData.y, mData.width, mData.height);
 					eTempCanvas.getContext("2d").putImageData(oImageData, 0, 0);
-					
 
-					eTempCanvas.getContext("2d").drawImage(canvasStickers,0,0, mData.width, mData.height);
+					eTempCanvas.getContext("2d").drawImage(canvasStickers, 0, 0, mData.width, mData.height);
 
 					
 					oPhotobooth.onImage(eTempCanvas.toDataURL());
