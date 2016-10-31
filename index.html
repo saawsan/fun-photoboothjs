@@ -32,7 +32,7 @@
 			#wrapper {
 				position: relative;
 				margin: 250px auto 0;
-				width: 800;
+				width: 800px;
 			}
 			#photobooth_wrapper {
 				position: relative;
@@ -164,12 +164,18 @@
 				var oPhotobooth = $('#rzf_photobooth').data('photobooth');
 				PB.photobooth = oPhotobooth;
 
+
+				//ADJUST SIZE OF STICKERS CANVAS 
+				var oCanvasSize = PB.photobooth.getSizes();
+				$('#rzf_photobooth_stickers').find('canvas').attr('width',oCanvasSize.width);
+				$('#rzf_photobooth_stickers').find('canvas').attr('height',oCanvasSize.height);
+
+				//HANDLE FILTERS
 				PB.setHSBfilters = function(tHSB){
 					oPhotobooth.setHueOffset(tHSB[0]);
 					oPhotobooth.setSaturationOffset(tHSB[1]);
 					oPhotobooth.setBrightnessOffset(tHSB[2]);
 				};
-				//HANDLE FILTERS
 				$('#filters').find('button').click(function(){
 					var $this = $(this);
 					var tHSB = $this.attr('data-hsb').split(';');
@@ -231,7 +237,6 @@
 							oPos.x = 0;
 							break;
 					}
-
 
 					newSticker.onload = function(){
 						//clear canvas before add new sticker

@@ -27,6 +27,10 @@ Photobooth = function( container )
 	*/
 	this.onImage = function(){};
 
+	this.getSizes = function(){
+		return { width:_width, height:_height };
+	};
+	
 	this.getHueOffset = function()
 	{
 		return hueOffset;
