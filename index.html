@@ -14,10 +14,18 @@
 		<title>Photobooth.js</title>
 
 		<style type="text/css">
-			body { background: #333; }
+			body { 
+				background: #020204 url(img/moon.jpg) no-repeat 90% 0;
+				background: #020204 url(img/moon.jpg) no-repeat calc(50% + 380px) -40px;
+			}
 			h1 {
 				margin-bottom: 1em;
 				opacity:.6;
+			}
+			#wrapper {
+				position: relative;
+				margin: 250px auto 0;
+				width: 800;
 			}
 			#photobooth_wrapper {
 				position: relative;
@@ -27,6 +35,9 @@
 				position: absolute;
 				top: 0; right: 0; left: 0; bottom: 0;
 			}
+			#rzf_photobooth .toolbar {
+				display: none;
+			}
 			#rzf_photobooth_stickers {
 				position: absolute;
 				top: 0; left: 0;
@@ -34,52 +45,83 @@
 				height: 100%;
 			}
 			#rzf_photobooth_stickers canvas {
-				background-color: red;
 				width: 100%;
 				height:100%;
+			}
+
+
+			#filters {
+				position: absolute;
+				right: 0;
+				top: 0;
+				z-index: 1;
+			}
+			#filters button {
+				display:block;
+				width: 70px;
+				height: 50px;
+				background:#050531;
+				color:#FFF;
+				border:none;
+			}
+			#stickers {
+				float: left;
+				overflow: hidden;
+			}
+			#stickers li {
+				float: left;
+			}
+			#stickers button {
+				display:block;
+				width: 70px;
+				height: 50px;
+				background:#050531;
+				color:#FFF;
+				border:none;
+			}
+			#smile {
+				float: right;
+				display:block;
+				padding: 0 15px;
+				height: 50px;
+				background:#F00;
+				color:#FFF;
+				border:none;
 			}
 		</style>
 	</head>
 	<body>
 		
 		<div id="wrapper">
-			<h1>
-				<a name="Demo">HTML5 Fun Photobooth</a>
-			</h1>
+			
 			<div id="photobooth_wrapper">
 				<div id="rzf_photobooth"></div>
 				<div id="rzf_photobooth_stickers"><canvas></canvas></div>
 			</div>
-			<div id="gallery"></div>
 
 			<div id="decor">
 				<ul id="filters">
-					<li><button type="button" data-filter="filter0" data-hsb="0;0;0">RESET</button></li>
+					<li><button type="button" data-filter="filter0" data-hsb="0;0;0">Normal</button></li>
 					<li><button type="button" data-filter="filter1" data-hsb="0.2;-0.3;0.5">Filtre 1</button></li>
 					<li><button type="button" data-filter="filter2" data-hsb="-0.4;0.1;-0.4">Filtre 2</button></li>
 					<li><button type="button" data-filter="filter3" data-hsb="0.1;0.4;0.1">Filtre 3</button></li>
 					<li><button type="button" data-filter="filter4" data-hsb="0.2;0.3;-0.2">Filtre 4</button></li>
 				</ul>
 				<ul id="stickers">
-					<li><button type="button" class="reset">RESET</button></li>
+					<li><button type="button" class="reset">Pas de stickers</button></li>
 					<li><button type="button" data-img="stranger.png" data-pos="bottom;left">Sticker 1</button></li>
 					<li><button type="button" data-img="backfuture.png" data-pos="top;center">Sticker 2</button></li>
-					<li><button type="button" data-img="stranger.png">Filtre 2</button></li>
-					<li><button type="button" data-img="stranger.png">Filtre 3</button></li>
-					<li><button type="button" data-img="stranger.png">Filtre 4</button></li>
+					<li><button type="button" data-img="backfuture.png" data-pos="bottom;right">Sticker 3</button></li>
+					<li><button type="button" data-img="backfuture.png" data-pos="center;left">Sticker 4</button></li>
 				</ul>
 			</div>
 			<button type="button" id="smile">TAKE A PICTURE</button>
 
 
+			<div id="gallery"></div>
 
 
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
-
-			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
-
-
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
+			<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
 
 			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
 
@@ -87,25 +129,30 @@
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
 
 			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p>
+
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies nisl sit amet consectetur rutrum. Vestibulum cursus facilisis nisi, quis rutrum ex euismod quis. Vestibulum laoreet felis tortor, non dignissim tortor fringilla volutpat. Quisque suscipit vitae neque ut molestie. Suspendisse bibendum sem et nisi eleifend, sed interdum diam molestie. Duis tempor velit ac mattis iaculis. Vivamus iaculis urna odio, vel luctus dui molestie eu. In mattis arcu id sem placerat varius. Aliquam placerat placerat eros a facilisis. Integer lobortis porttitor enim id malesuada. Vivamus hendrerit ultrices mi eget cursus.</p>
+
+			<p>Suspendisse tincidunt rutrum hendrerit. Nulla varius enim ut massa vulputate tempus. Nunc sagittis tincidunt enim. Nullam tincidunt nibh nec augue vehicula, et tristique massa sollicitudin. Ut sollicitudin ante sit amet hendrerit imperdiet. Curabitur eget eros luctus, varius purus sed, dapibus ipsum. Nam at interdum orci. Praesent euismod felis eu consequat elementum. Integer suscipit lorem sed mi pulvinar, non molestie metus iaculis. Nullam interdum pharetra sem. Pellentesque sed ultrices est.</p> -->
 		</div>
 
 
 		<script>
 
 			//TODO
-			// create php webservice to save base64 as an actual image.
-			// fix custom position for stickers 
-			// remove toolbar (add option on PhotoboothJs lib)
-			// set size on the main canvas (mobile support?)
-			// add new assets
-			// test
-			// clean code
+			// create php webservice to save base64 as an actual image..............OK
+			// fix custom position for stickers.....................................OK
+			// remove toolbar.......................................................OK
+			// set size on the main canvas..........................................OK
+			// preload assets.......................................................
+			// add new assets.......................................................
+			// test.................................................................
+			// clean code...........................................................
 
 			var PB = PB || [];
 			$(function(){
 
 				$('#rzf_photobooth').photobooth().on('image', function( event, dataUrl ){
-					console.log('capture image event callback'); 
 					$('#gallery').show().append('<img src="' + dataUrl + '" >');
 
 					//create physical image
@@ -122,8 +169,6 @@
 				PB.photobooth = oPhotobooth;
 
 				PB.setHSBfilters = function(tHSB){
-					console.log(tHSB)
-					console.log(oPhotobooth)
 					oPhotobooth.setHueOffset(tHSB[0]);
 					oPhotobooth.setSaturationOffset(tHSB[1]);
 					oPhotobooth.setBrightnessOffset(tHSB[2]);
@@ -131,7 +176,6 @@
 				//HANDLE FILTERS
 				$('#filters').find('button').click(function(){
 					var $this = $(this);
-					console.log($this);
 					var tHSB = $this.attr('data-hsb').split(';');
 
 					for(var i=0;i<tHSB.length;i++){
@@ -147,37 +191,56 @@
 
 				var path = 'assets/';
 
-				function make_base() {
-					var base_image = new Image();
-					base_image.src = 'assets/stranger.png';
-					var newWidth = base_image.width;
-					if(base_image.width > canvasStickers.width) {
-						newWidth = canvasStickers.width - canvasStickers.width/2.5;
-					}
-					// console.log(newWidth)
 
-					var newHeight = newWidth * base_image.height / base_image.width;
-					
-					base_image.onload = function(){
-						contextStickers.drawImage(base_image, 0, canvasStickers.height - newHeight, newWidth,  newHeight);
-					}
-				}
-				// make_base();
 				var addStickers = function(sImg, tPos){
 					var newSticker = new Image();
 					newSticker.src = path+sImg;
-					console.log(path+sImg);	
 
+					//get/set sticker size
 					var stickerWidth = newSticker.width;
 					if(newSticker.width > canvasStickers.width) {
 						stickerWidth = canvasStickers.width - canvasStickers.width/2.5;
 					}
 					var stickerHeight = stickerWidth * newSticker.height / newSticker.width;
 
+					//get/set sticker position
+					var oPos = {x:0, y:0};
+
+					switch(tPos[0]) {
+						case 'top': 
+							oPos.y = 0;
+							break;
+						case 'bottom':
+							oPos.y = canvasStickers.height - stickerHeight
+							break;
+						case 'center':
+							oPos.y = canvasStickers.height/2 - stickerHeight/2
+							break;
+						default:
+							oPos.y = 0;
+							break;
+					}
+
+					switch(tPos[1]) {
+						case 'left': 
+							oPos.x = 0;
+							break;
+						case 'right':
+							oPos.x = canvasStickers.width - stickerWidth
+							break;
+						case 'center':
+							oPos.x = canvasStickers.width/2 - stickerWidth/2
+							break;
+						default:
+							oPos.x = 0;
+							break;
+					}
+
+
 					newSticker.onload = function(){
 						//clear canvas before add new sticker
 						contextStickers.clearRect(0, 0, canvasStickers.width, canvasStickers.height);
-						contextStickers.drawImage(newSticker, 0, canvasStickers.height - stickerHeight, stickerWidth,  stickerHeight);
+						contextStickers.drawImage(newSticker, oPos.x, oPos.y, stickerWidth,  stickerHeight);
 					}
 				};
 				$('#stickers').find('button').click(function(){
@@ -195,9 +258,6 @@
 
 				//CAPTURE
 				var cE = function( s ){ return document.createElement( s ); };
-
-				// var eOutput = ePhotobooth.getElementsByTagName( "canvas" )[ 0 ];
-				// var oOutput = eOutput.getContext( "2d" );
 
 				var canvasPhotobooth = $('#rzf_photobooth').find('canvas').get(0);
 				var contextPhotobooth = canvasPhotobooth.getContext('2d');
