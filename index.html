@@ -120,6 +120,7 @@
 				<ul id="stickers">
 					<li><button type="button" class="reset">Pas de stickers</button></li>
 					<li><button type="button" data-img="stranger.png" data-pos="bottom;left">Stranger</button></li>
+					<li><button type="button" data-img="backfuture.png" data-pos="10;50">Future</button></li>
 					<li><button type="button" data-img="backfuture.png" data-pos="top;center">Future</button></li>
 					<li><button type="button" data-img="backfuture.png" data-pos="bottom;right">Sticker 3</button></li>
 					<li><button type="button" data-img="backfuture.png" data-pos="center;left">Sticker 4</button></li>
@@ -140,7 +141,7 @@
 			// fix custom position for stickers.....................................OK
 			// remove toolbar.......................................................OK
 			// set size on the main canvas..........................................OK
-			// preload assets.......................................................
+			// preload assets.......................................................OK
 			// add new assets.......................................................
 			// test.................................................................
 			// clean code...........................................................
@@ -148,7 +149,7 @@
 			var PB = PB || [];
 			$(function(){
 
-				$('#rzf_photobooth').photobooth().on('image', function( event, dataUrl ){
+				$('#rzf_photobooth').photobooth().on('image', function(event, dataUrl){
 					// $('#gallery').show().append('<img src="' + dataUrl + '" >');
 
 					//create physical image
@@ -183,7 +184,6 @@
 					for(var i=0;i<tHSB.length;i++){
 						tHSB[i] = parseFloat(tHSB[i]);
 					}
-
 					PB.setHSBfilters(tHSB);
 				});
 
@@ -193,6 +193,18 @@
 
 				var path = 'assets/';
 
+				//prelaod stickers
+				var tPreloadImg = []; 
+				function preload(tPreload) {
+					for (var i = 0; i < tPreload.length; i++) {
+						var currentImg = new Image();
+						currentImg.src = tPreload[i];
+					}
+				}
+				$('#stickers').find('button:not(.reset)').each(function(){
+					tPreloadImg.push(path+$(this).attr('data-img'));
+				});
+				preload(tPreloadImg);
 
 				var addStickers = function(sImg, tPos){
 					var newSticker = new Image();
@@ -213,13 +225,13 @@
 							oPos.y = 0;
 							break;
 						case 'bottom':
-							oPos.y = canvasStickers.height - stickerHeight
+							oPos.y = canvasStickers.height - stickerHeight;
 							break;
 						case 'center':
-							oPos.y = canvasStickers.height/2 - stickerHeight/2
+							oPos.y = canvasStickers.height/2 - stickerHeight/2;
 							break;
 						default:
-							oPos.y = 0;
+							oPos.y = parseInt(tPos[0], 10) || 0;
 							break;
 					}
 
@@ -228,13 +240,13 @@
 							oPos.x = 0;
 							break;
 						case 'right':
-							oPos.x = canvasStickers.width - stickerWidth
+							oPos.x = canvasStickers.width - stickerWidth;
 							break;
 						case 'center':
-							oPos.x = canvasStickers.width/2 - stickerWidth/2
+							oPos.x = canvasStickers.width/2 - stickerWidth/2;
 							break;
 						default:
-							oPos.x = 0;
+							oPos.x = parseInt(tPos[1], 10) || 0;
 							break;
 					}
 
@@ -242,7 +254,7 @@
 						//clear canvas before add new sticker
 						contextStickers.clearRect(0, 0, canvasStickers.width, canvasStickers.height);
 						contextStickers.drawImage(newSticker, oPos.x, oPos.y, stickerWidth,  stickerHeight);
-					}
+					};
 				};
 				$('#stickers').find('button').click(function(){
 					var $this = $(this);
@@ -258,7 +270,7 @@
 
 
 				//CAPTURE
-				var cE = function( s ){ return document.createElement( s ); };
+				var cE = function(s){ return document.createElement(s); };
 
 				var canvasPhotobooth = $('#rzf_photobooth').find('canvas').get(0);
 				var contextPhotobooth = canvasPhotobooth.getContext('2d');
@@ -269,7 +281,7 @@
 					*/
 					eBlind.className = "blind";
 					eBlind.style.opacity = 1;
-					setTimeout(function () { eBlind.className = "blind anim"; eBlind.style.opacity = 0; }, 50);
+					setTimeout(function(){ eBlind.className = "blind anim"; eBlind.style.opacity = 0; }, 50);
 
 					var mData = {
 						x: 0,
