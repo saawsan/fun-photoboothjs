@@ -1,5 +1,5 @@
 <title>Create Image</title>
-<? echo 'start saving image';
+<? echo 'start saving image<br><br>';
 
 if (isset($_POST['base64'])) {
     echo $_POST['base64'];
@@ -28,10 +28,31 @@ eNpiYMAHAAIMAAAeAAHMILKLAAAAAElFTkSuQmCC';
 // list($type, $data) = explode(';', $data);
 // list(, $data)      = explode(',', $data);
 // $data = base64_decode($data);
-$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
+echo $data;
+$data = preg_replace('#^data:image/\w+;base64,#i', '', $data);
+// $data = str_replace('data:image/png;base64,', '', $data);
 
-$rand = substr(md5(microtime()),rand(0,26),3);
-file_put_contents('../photos/img-'.date('m-d-Y-His A e').'-'.$rand.'.png', $data);
+echo '<br>';
+echo '<br>';
+echo '<br>';
+echo $data;
 
+$data = base64_decode(str_replace('data:image/png;base64,', '', $data));
+
+$date = date('Ymd-His');
+$rand = substr(md5(microtime()),rand(0,26),5);
+
+echo '<br>';
+echo '<br>';
+echo '<br>';
+echo '../photos/img-'.$date.'-'.$rand.'.png';
+echo '<br>';
+echo $data;
+
+
+file_put_contents('../photos/img-'.$date.'-'.$rand.'.png', $data);
+// file_put_contents('../photos/img-'.date('m-d-Y-His A e').'-'.$rand.'.png', $data);
+
+// phpinfo();
 
 ?>
